@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Simple scrambled eggs recipe tutorial" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrambled Eggs Tutorial</title>
+  <style>
+    /* Reset & base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      position: relative;
+      overflow: hidden;
+      color: #4a3c31;
+      line-height: 1.6;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    /* Animated glowing background overlay */
+    body::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+      animation: pulseGlow 12s infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 0.15;
+      }
+      100% {
+        transform: scale(1.1) translate(15px, 15px);
+        opacity: 0.3;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Container */
+    .container {
+      background: #fffefb;
+      max-width: 720px;
+      width: 100%;
+      padding: 40px 50px;
+      border-radius: 14px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+      position: relative;
+      z-index: 1;
+      overflow-y: auto;
+      max-height: 90vh;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .container:hover {
+      box-shadow: 0 25px 50px rgba(0,0,0,0.18);
+    }
+
+    /* Headings */
+    h1, h2 {
+      text-align: center;
+      margin-top: 0;
+      font-weight: 700;
+      color: #d35400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .highlight {
+      color: #e67e22;
+      font-weight: 900;
+    }
+
+    /* Sections */
+    .section {
+      background-color: #fff3e0;
+      padding: 20px 25px;
+      margin-bottom: 30px;
+      border-left: 8px solid #f39c12;
+      border-radius: 10px;
+      box-shadow: 0 5px 12px rgba(243, 156, 18, 0.25);
+      transition: background-color 0.3s ease;
+    }
+    .section:hover {
+      background-color: #ffe0b2;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 auto;
+      font-size: 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid #f39c12;
+      padding: 12px 16px;
+      text-align: left;
+      color: #5d4037;
+      background-color: #fff8e1;
+    }
+
+    th {
+      background-color: #f39c12;
+      color: white;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    /* Lists */
+    ol, ul {
+      padding-left: 25px;
+      color: #6d4c41;
+      font-size: 1rem;
+    }
+
+    /* Form */
+    form label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #a0522d;
+    }
+
+    form input[type="text"],
+    form textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 2px solid #f39c12;
+      font-family: inherit;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+    }
+    form input[type="text"]:focus,
+    form textarea:focus {
+      border-color: #d35400;
+      outline: none;
+      box-shadow: 0 0 6px rgba(211, 84, 0, 0.5);
+    }
+
+    form input[type="submit"] {
+      background-color: #f39c12;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+      margin: 0 auto;
+      user-select: none;
+      box-shadow: 0 6px 15px rgba(243, 156, 18, 0.6);
+    }
+
+    form input[type="submit"]:hover {
+      background-color: #d35400;
+      box-shadow: 0 8px 20px rgba(211, 84, 0, 0.8);
+    }
+
+    /* Paragraph & links */
+    p {
+      text-align: center;
+      color: #5d4037;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    a {
+      color: #d35400;
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #e67e22;
+    }
+
+    /* Media styling */
+    img {
+      display: block;
+      margin: 15px auto 25px;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      max-width: 100%;
+      height: auto;
+      user-select: none;
+      transition: transform 0.3s ease;
+    }
+    img:hover {
+      transform: scale(1.05);
+    }
+
+    audio, video {
+      display: block;
+      margin: 15px auto 30px;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      width: 100%;
+      max-width: 360px;
+      user-select: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 25px 20px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+      table {
+        font-size: 0.9rem;
+      }
+      audio, video {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Page Header -->
+    <h1>How to Make <span class="highlight">Scrambled Eggs</span></h1>
+    <p><em>Follow this quick and easy guide to make delicious scrambled eggs.</em></p>
+
+    <div class="section">
+      <h2>Ingredients</h2>
+      <table>
+        <thead>
+          <tr><th>Ingredient</th><th>Quantity</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Eggs</td><td>2</td></tr>
+          <tr><td>Butter</td><td>1 tbsp</td></tr>
+          <tr><td>Salt</td><td>To taste</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Instructions</h2>
+      <ol>
+        <li>Crack the eggs into a bowl and whisk them.</li>
+        <li>Heat butter in a pan over medium heat.</li>
+        <li>Pour the eggs into the pan and stir gently.</li>
+        <li>Cook until soft and creamy. Season with salt.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Tips</h2>
+      <ul>
+        <li>Use a non-stick pan for best results.</li>
+        <li>Don't overcook the eggs.</li>
+        <li>Optional: Add Butter or herbs for extra flavor.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Media</h2>
+      <p><strong>Image:</strong></p>
+      <img src="ScrambledEggs.jpg" alt="Scrambled eggs" width="300" />
+
+      <p><strong>Audio Instructions:</strong></p>
+      <audio controls>
+        <source src="SCRAMBLED EGGS - How To Make Perfect Scrambled Eggs for Breakfast (1).mp4" type="audio/mpeg" />
+      </audio>
+
+      <p><strong>Video Tutorial:</strong></p>
+      <video controls>
+        <source src="SCRAMBLED EGGS - How To Make Perfect Scrambled Eggs for Breakfast (1).mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="section">
+      <h2>Leave Your Feedback</h2>
+      <form action="#" method="post" novalidate>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your name..." />
+
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments" rows="4" placeholder="Your feedback..."></textarea>
+
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+
+    <p>
+      For more recipes, visit
+      <a href="https://www.allrecipes.com" target="_blank" rel="noopener noreferrer">AllRecipes.com</a>
+    </p>
+  </div>
+</body>
+</html>
